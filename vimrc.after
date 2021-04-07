@@ -1,0 +1,33 @@
+" Plugins
+call plug#begin()
+
+Plug 'W0rp/ale'
+Plug 'tpope/vim-abolish'
+
+call plug#end()
+
+" base config
+set mouse=a
+set nu
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
+nnoremap <Space> viw
+vnoremap // :s/^/\/\//g<cr> <esc>:noh<cr>
+vnoremap ;; :s/^/\;\;/g<cr> <esc>:noh<cr>
+vnoremap ## :s/^/\#\#/g<cr> <esc>:noh<cr>
+nnoremap // :s/^/\/\//<cr> <esc>:noh<cr>
+nnoremap ;; :s/^/\;\;/<cr> <esc>:noh<cr>
+nnoremap ## :s/^/\#\#/<cr> <esc>:noh<cr>
+vmap <C-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+
+" Ctags auto update when hit :w
+augroup Ctags
+  autocmd!
+  autocmd BufWritePost *.c,*.h,*.cxx,*.hxx,*.cc,*.hh,*.cpp,*.hpp silent !ctags -R .
+augroup END
+
+" git grep
+command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
+nnoremap <C-F> :Ggr <cword><CR>
