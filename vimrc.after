@@ -3,6 +3,7 @@ call plug#begin()
 
 Plug 'W0rp/ale'
 Plug 'tpope/vim-abolish'
+Plug 'kshenoy/vim-signature'
 
 call plug#end()
 
